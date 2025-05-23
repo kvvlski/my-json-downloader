@@ -36,7 +36,6 @@ export const downloadTrack = (data: {
 			`album="${data.albumName}"`,
 		],
 		{
-			shell: true,
 			stdio: "inherit",
 		},
 	);
