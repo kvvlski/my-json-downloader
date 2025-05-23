@@ -1,4 +1,4 @@
-import { exec } from "node:child_process";
+import { spawn } from "node:child_process";
 import * as path from "node:path";
 
 const YT_DLP_BINARY = path.join(__dirname, "../bin/yt-dlp.exe");
@@ -32,11 +32,10 @@ export const downloadTrack = (data: {
 		`--metadata title="${data.trackName}"`,
 	].join(" ");
 
-	const proc = exec(command, (error, stdout, stderr) => {
-		if (process.env.DEBUG) {
-			console.log(stdout);
-			console.error(stderr);
-		}
+	const proc = spawn(command, {
+		shell: true,
+		detached: true,
+		stdio: "ignore",
 	});
 	return new Promise((resolve) => {
 		proc.on("exit", (code) => {
