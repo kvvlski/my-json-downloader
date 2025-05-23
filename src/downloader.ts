@@ -34,8 +34,10 @@ export const downloadTrack = (data: {
 
 	const proc = spawn(command, {
 		shell: true,
-		detached: true,
-		stdio: "ignore",
+		stdio: "inherit",
+	});
+	proc.on("error", (err) => {
+		console.error("Error spawning process:", err);
 	});
 	return new Promise((resolve) => {
 		proc.on("exit", (code) => {
