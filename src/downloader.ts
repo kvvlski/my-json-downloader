@@ -14,7 +14,7 @@ export const downloadTrack = (data: {
 	)} - ${data.trackName}`;
 	const safeTrackName = fullTrackname.replace(/[^a-zA-Z0-9\s]/g, "_");
 	const command = [
-		YT_DLP_BINARY,
+		process.env.YT_DLP || YT_DLP_BINARY,
 		"--no-warnings",
 		"--no-check-certificate",
 		"--format",
